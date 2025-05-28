@@ -19,8 +19,12 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center gap-4 h-[85vh]">
 
             <div className='normal flex gap-4 flex-col'>
-                <CardBox children={<FausetSol />} />
-                <CardBox children={<SecondOption />}/>
+                <CardBox>
+                    <FausetSol />
+                </CardBox>
+                <CardBox>
+                    <SecondOption />
+                </CardBox>
             </div>
         </div>
 

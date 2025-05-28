@@ -3,7 +3,7 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Button from "./Button";
 import InputBox from "./InputBox";
@@ -11,25 +11,21 @@ import Spyder from "./icons/Spyder";
 
 function FausetSol() {
     const { publicKey } = useWallet();
-    const [mounted, setMounted] = useState(false);
     const  { connection }  = useConnection();
     const refInput = useRef<HTMLInputElement>(null);
     const [balance, setBalance] = useState<number | null>(null);
+    const [mounted, setMounted] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const getBalance = async () => {   
-        console.log("Fetching balance for:");
-        if (!publicKey) {
-            console.log("Wallet not connected");
-            return;
-        }
+    const getBalance = useCallback(async () => {
+        if (!publicKey) return;
         try {
-            const balance = await connection.getBalance(publicKey);
-            setBalance(balance);
+            const bal = await connection.getBalance(publicKey);
+            setBalance(bal);
         } catch (error) {
-            console.error('Error fetching balance:', error);
+            console.error("Error fetching balance:", error);
         }
-    }
+    }, [publicKey, connection]);
 
     const handleAirdrop = async () => {
         const amount = refInput.current?.value ? parseFloat(refInput.current.value) : 0;
@@ -66,7 +62,7 @@ function FausetSol() {
     useEffect(() => {
         setMounted(true);
         getBalance();
-    }, [publicKey]);
+    }, [publicKey, getBalance]);
 
     if (!mounted) return null; 
 
@@ -85,7 +81,7 @@ function FausetSol() {
                     <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
                 </div>
                 <div className="w-72">
-                    {/* @ts-ignore */}
+                    {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
                     <InputBox reference={refInput} text={"SOL - Amount"} />
                 </div>
                 <div className="w-72">

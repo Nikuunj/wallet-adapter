@@ -33,6 +33,7 @@ function SendSol() {
             setLoading(true);
             transaction.add(
                 SystemProgram.transfer({
+                    // @ts-expect-error: `fromPubkey` expects a PublicKey, but `wallet.publicKey` can be null if the wallet is not connected.
                     fromPubkey: wallet.publicKey,
                     toPubkey: new PublicKey(address),
                     lamports: amount * LAMPORTS_PER_SOL,
@@ -55,9 +56,9 @@ function SendSol() {
                 <div className="text-xl text-white font-semibold tracking-wider">
                     Send SOL
                 </div>
-                {/* @ts-ignore */}
+                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
                 <InputBox reference={refInput} text={"SOL - Amount"} typeOfInp={'number'}/>
-                {/* @ts-ignore */}
+                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
                 <InputBox reference={refAddress} text={'Wallet Address'} typeOfInp={'text'}/>
                 <Button text={loading ? "Sending..." : "Send SOL"} handleClick={handleSendSol}/>
             </div>
