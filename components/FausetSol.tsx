@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Button from "./Button";
 import InputBox from "./InputBox";
 import Spyder from "./icons/Spyder";
+import Loading from "./Loading";
 
 function FausetSol() {
     const { publicKey } = useWallet();
@@ -20,10 +21,13 @@ function FausetSol() {
     const getBalance = useCallback(async () => {
         if (!publicKey) return;
         try {
+            setLoading(true);
             const bal = await connection.getBalance(publicKey);
             setBalance(bal);
         } catch (error) {
             console.error("Error fetching balance:", error);
+        } finally {
+            setLoading(false);
         }
     }, [publicKey, connection]);
 
@@ -68,33 +72,33 @@ function FausetSol() {
 
     if(!publicKey) {
         return (
-        <div className="flex flex-col items-center justify-center gap-4 h-[85vh]">
+        <div className="flex flex-col items-center justify-center gap-4">
             <WalletMultiButton />
             Please connect your wallet to use the faucet.
         </div>
     )}
 
     return (
-        <>
+        <div className="flex flex-col items-center justify-center gap-4">
 
-                <div className="text-xl text-white ">Wallet Address : <span className="tracking-wider"> {publicKey.toBase58()} </span><br /> 
-                    <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
-                </div>
-                <div className="w-72">
-                    {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
-                    <InputBox reference={refInput} text={"SOL - Amount"} />
-                </div>
-                <div className="w-72">
-                    <Button handleClick={handleAirdrop} text={<div className="flex justify-center items-center gap-2"><Spyder/> Air Drop</div>} />
-                </div>
-                <div>
-                    Balance: {balance ? balance / LAMPORTS_PER_SOL : 0} SOL
-                </div>
+            <div className="text-xl text-white text-wrap">Wallet Address : <span className="tracking-wider"> {publicKey.toBase58()} </span><br /> 
+                <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
+            </div>
+            <div className="w-72">
+                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
+                <InputBox reference={refInput} text={"SOL - Amount"} />
+            </div>
+            <div className="w-72">
+                <Button handleClick={handleAirdrop} text={<div className="flex justify-center items-center gap-2"><Spyder/> Air Drop</div>} />
+            </div>
+            <div>
+                Balance: {balance ? balance / LAMPORTS_PER_SOL : 0} SOL
+            </div>
 
-            { loading && (<div className="fixed flex-col inset-0 flex w-full bg-gray-900/50 items-center justify-center gap-4 h-screen">
-                <div className="text-white">Processing your request...</div>
-            </div>) }
-        </>
+            {loading && (
+              <Loading />
+            )}
+        </div>
     );
 }
 
