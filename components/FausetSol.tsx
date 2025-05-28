@@ -5,6 +5,9 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import Button from "./Button";
+import InputBox from "./InputBox";
+import Spyder from "./icons/Spyder";
 
 function FausetSol() {
     const { publicKey } = useWallet();
@@ -30,6 +33,7 @@ function FausetSol() {
 
     const handleAirdrop = async () => {
         const amount = refInput.current?.value ? parseFloat(refInput.current.value) : 0;
+        console.log("Airdropping amount:", amount);
         if (!publicKey) {
             console.error("Wallet not connected");
             return;
@@ -59,7 +63,6 @@ function FausetSol() {
         }  
     };
 
-
     useEffect(() => {
         setMounted(true);
         getBalance();
@@ -76,28 +79,26 @@ function FausetSol() {
     )}
 
     return (
-        <div className="flex flex-col items-center justify-center gap-4 h-[85vh]">
-            <div className=" border border-gray-800 p-16 rounded-lg shadow-lg flex flex-col items-center gap-4"> 
+        <>
+
                 <div className="text-xl text-white ">Wallet Address : <span className="tracking-wider"> {publicKey.toBase58()} </span><br /> 
                     <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
                 </div>
                 <div className="w-72">
-                    <input type="number"
-                    className="text-white border outline-0 border-gray-800 rounded-sm px-3 py-2 w-full tracking-wider"
-                    ref={refInput} name="sol" placeholder="SOL - Amount"/>
+                    {/* @ts-ignore */}
+                    <InputBox reference={refInput} text={"SOL - Amount"} />
                 </div>
                 <div className="w-72">
-                    <button className={`cursor-pointer outline-0 bg-gray-200 text-black px-10 py-2 rounded-sm w-full`} onClick={handleAirdrop}>Air Drop</button>
+                    <Button handleClick={handleAirdrop} text={<div className="flex justify-center items-center gap-2"><Spyder/> Air Drop</div>} />
                 </div>
                 <div>
                     Balance: {balance ? balance / LAMPORTS_PER_SOL : 0} SOL
                 </div>
-            </div>
 
             { loading && (<div className="fixed flex-col inset-0 flex w-full bg-gray-900/50 items-center justify-center gap-4 h-screen">
                 <div className="text-white">Processing your request...</div>
             </div>) }
-        </div>
+        </>
     );
 }
 

@@ -1,3 +1,4 @@
+'use client'
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDisconnectButton, WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 import Logo from "./icons/Logo";
@@ -15,7 +16,6 @@ function NavBar() {
                     <Logo /> X-AirDrop
                 </div>
                 <div>
-
                     {!wallet.connected ? <WalletMultiButton /> : <WalletDisconnectButton />}
                 </div>
             </div>

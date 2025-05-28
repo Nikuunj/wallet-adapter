@@ -1,18 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import {
-    WalletModalProvider
-} from '@solana/wallet-adapter-react-ui';
-import '@solana/wallet-adapter-react-ui/styles.css';
-
 import FausetSol from '@/components/FausetSol';
-import NavBar from '@/components/NavBar';
+import CardBox from '@/components/CardBox';
+import SecondOption from '@/components/SecondOption';
 
 
 export default function Home() {
     const [mounted, setMounted] = useState(false);
-
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -21,15 +15,14 @@ export default function Home() {
 
 
     return (
-        <ConnectionProvider endpoint="https://api.devnet.solana.com">
-            <WalletProvider wallets={[]} autoConnect>
-                <WalletModalProvider>
-                    <NavBar />
-                    <div className='normal'>
-                        <FausetSol />
-                    </div>
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
+    
+        <div className="flex flex-col items-center justify-center gap-4 h-[85vh]">
+
+            <div className='normal flex gap-4 flex-col'>
+                <CardBox children={<FausetSol />} />
+                <CardBox children={<SecondOption />}/>
+            </div>
+        </div>
+
     );
 }
