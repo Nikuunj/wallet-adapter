@@ -11,12 +11,17 @@ function NavBar() {
     
     return (
         <>
-            <div className="flex justify-between items-center p-4 text-white nav "> 
+            <div className="flex justify-between items-center py-2  px-5 text-white nav "> 
                 <div className="text-base sm:text-3xl flex justify-center items-center gap-1 sm:gap-3">
                     <Logo /> X-AirDrop
                 </div>
                 <div>
-                    {!wallet.connected ? <WalletMultiButton /> : <WalletDisconnectButton />}
+                    <div>
+                        {!wallet.connected ? <WalletMultiButton /> : <WalletDisconnectButton />}
+                    </div>
+                    <div className="text-end ">
+                        Devnet
+                    </div>
                 </div>
             </div>
             <hr className="text-gray-300"/>
