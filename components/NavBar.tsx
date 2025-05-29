@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDisconnectButton, WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 import Logo from "./icons/Logo";
@@ -6,8 +6,6 @@ import Logo from "./icons/Logo";
 
 function NavBar() {
     const wallet = useWallet();
-
-    console.log("Wallet connected:", wallet.connected);
     
     return (
         <>
