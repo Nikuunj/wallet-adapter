@@ -47,6 +47,7 @@ export default function RootLayout({
       >
         <WalletContexProvide>
           <NavBar />
+
           {children}
           <Toaster />
         </WalletContexProvide>
