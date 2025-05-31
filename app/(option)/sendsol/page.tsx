@@ -107,10 +107,8 @@ function SendSol() {
                 <div className="text-xl text-white font-semibold tracking-wider">
                     Send SOL
                 </div>
-                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
-                <InputBox reference={refInput} text={`Amount - Max. ${maxTransferable} SOL`} typeOfInp={'number'}/>
-                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
-                <InputBox reference={refAddress} text={'Wallet Address'} typeOfInp={'text'}/>
+                <InputBox reference={(e) => refInput.current = e} text={`Amount - Max. ${maxTransferable} SOL`} typeOfInp={'number'}/>
+                <InputBox reference={(e) => refAddress.current = e} text={'Wallet Address'} typeOfInp={'text'}/>
                 <Button text={loading ? "Sending..." : "Send SOL"} handleClick={handleSendSol}/>
             </div>
             

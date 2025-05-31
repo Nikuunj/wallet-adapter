@@ -83,8 +83,7 @@ function FausetSol() {
                 <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
             </div>
             <div className="w-72">
-                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
-                <InputBox reference={refInput} text={"SOL - Amount"} />
+                <InputBox reference={(e) => refInput.current = e} text={"SOL - Amount"} typeOfInp={"text"}/>
             </div>
             <div className="w-72">
                 <Button handleClick={handleAirdrop} text={<div className="flex justify-center items-center gap-2"><Spyder/> Air Drop</div>} />

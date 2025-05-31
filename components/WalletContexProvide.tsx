@@ -21,7 +21,7 @@ export const useSolanaNetwork = () => {
 
 
 function WalletContexProvide({ children }: { children: React.ReactNode }) {
-    const [network, setNetwork] = useState<NetworkType>('testnet');
+    const [network, setNetwork] = useState<NetworkType>('devnet');
 
     const rpcEndpoint = useMemo(() => {
         switch (network) {

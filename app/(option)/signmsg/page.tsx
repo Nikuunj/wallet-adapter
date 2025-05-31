@@ -38,8 +38,7 @@ function SignMsg() {
                 <div className="text-xl text-white font-semibold tracking-wider">
                     Sign Massage
                 </div>
-                {/*  @ts-expect-error: InputBox expects a generic ref type, but custom prop `reference` doesn't match expected interface. */}
-                <InputBox reference={refInput} text={`Massage..`} typeOfInp={'text'}/>
+                <InputBox reference={(e) => refInput.current = e} text={`Massage..`} typeOfInp={'text'}/>
                 <Button text={loading ? "Signing..." : "Sign"} handleClick={onClick}/>
             </div>
             

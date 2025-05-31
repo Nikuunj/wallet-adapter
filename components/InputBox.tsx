@@ -1,6 +1,6 @@
 
 interface InputBoxProps { 
-    reference: React.RefObject<HTMLInputElement> | null; 
+    reference: (instance: HTMLInputElement | null) => void;
     text: string; 
     typeOfInp: string 
 }

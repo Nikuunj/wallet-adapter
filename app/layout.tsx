@@ -43,7 +43,7 @@ export default function RootLayout({
         </style>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-hidden min-h-screen min-w-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-x-hidden min-h-screen min-w-screen`}
       >
         <WalletContexProvide>
           <NavBar />
