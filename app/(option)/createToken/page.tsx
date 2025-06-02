@@ -41,7 +41,7 @@ function CreateToken() {
                 mint: mintkeyPair.publicKey,
                 name: 'OPOSSS',
                 symbol: 'OPOSSS',
-                uri: 'https://cdn.100xdevs.com/metadata.json',
+                uri: 'https://bafybeidfm65jzvz4zeesxp6ybinkitvpd27klk6yspstrtw5fuy5w27lkq.ipfs.w3s.link/metadata.json',
                 additionalMetadata: [],
             };
 
@@ -81,7 +81,6 @@ function CreateToken() {
                     updateAuthority: wallet.publicKey,
                 }),
             );
-            // https://ik.imagekit.io/jh5fuaux3/images/E__pr_one1app_server_public_temp_1748872676155-logo_yO9oNZRZ2j.png
             transaction.feePayer = wallet.publicKey;
             const recentBlock = await connection.getLatestBlockhash();
             transaction.recentBlockhash = recentBlock.blockhash;
@@ -100,8 +99,10 @@ function CreateToken() {
 
     return (
         <>
-            <div>
-                <h1>Create Token</h1>
+            <div className="flex flex-col items-center justify-center gap-4 w-72">
+                <div className="text-xl text-white font-semibold tracking-wider">
+                    Create Token
+                </div>
                 
                 <div className="w-72 gap-2 flex flex-col">
                     <InputBox reference={(e) => refInputArr.current[0] = e} text={`Token Name`} typeOfInp={'text'}/>
