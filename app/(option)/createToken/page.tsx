@@ -41,23 +41,21 @@ function CreateToken() {
             console.log({ tokenImageUrl, tokenName, tokenSymbol, description })
             
             const res = await axios.post('/api/store-uri-data' ,  {
-                key: mintkeyPair.publicKey.toBase58(),
                 name: tokenName,
                 symbol: tokenSymbol,
                 image: tokenImageUrl,
                 description: description,
             });
             console.log(res.data);
-
-             const metadata = {
+            const uri = await res.data.url;
+            
+            const metadata = {
                 mint: mintkeyPair.publicKey,
                 name: tokenName,
                 symbol: tokenSymbol,
-                uri: 'https://wallet-adapter-wine.vercel.app/api/get-data/' + mintkeyPair.publicKey.toBase58(),
+                uri: uri,
                 additionalMetadata: [],
             };
-
-            
             const mintLen = getMintLen([ExtensionType.MetadataPointer]);
             const metadataLen = TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
             const lamports = await connection.getMinimumBalanceForRentExemption(mintLen + metadataLen);

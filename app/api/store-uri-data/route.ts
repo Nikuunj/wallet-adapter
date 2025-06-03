@@ -1,5 +1,7 @@
-import { url_model } from "@/db/schema";
+import { pinata } from "@/config/config";
 import { NextRequest, NextResponse } from "next/server";
+
+const mainDomain = process.env.NEXT_PUBLIC_GATEWAY_UR;
 
 
 export async function POST(request: NextRequest) {
@@ -11,21 +13,31 @@ export async function POST(request: NextRequest) {
         }, { status: 400 });
     }
 
-    const { key, name, symbol, image, description } = data;
+    const { name, symbol, image, description } = data;
 
     try {
-        const res = await url_model.create({
-            key: key || "No Key",
-            name: name || "No Name Provided",
-            symbol: symbol || "No Symbol Provided",
-            image : image|| "No Image URL Provided",
-            description: description || "No Description Provided"
-        })
+        if (!name || !symbol || !image || !description) {
+            return NextResponse.json({
+                error: "All fields are required",
+            }, { status: 400 });
+        }
 
-        return NextResponse.json({
-            message: "Data stored successfully",
-            id : res._id,
-        }, { status: 200 });
+        const metadata = {
+            name,
+            symbol,
+            description,
+            image,
+        };
+
+        const { cid } = await pinata.upload.public.json(metadata, {
+            metadata: {
+                name: "metadata.json"
+            }
+        });
+        // const url = await pinata.gateways.public.get(cid);
+        const url = `https://${mainDomain}/ipfs/${cid}/metadata.json`;
+        
+        return NextResponse.json({ url } , { status: 200 });
     } catch (error) {
         return NextResponse.json({
             request: 'not work',
