@@ -16,6 +16,7 @@ function CreateToken() {
     const refInputArr = useRef<HTMLInputElement[] | null[]>(Array(4).fill(0));
     const [loading, setLoading] = useState<boolean>(false);
     const wallet = useWallet();
+    const [token, setToken] = useState<string>('');
     const { connection } = useConnection();
 
     async function createToken() {
@@ -36,17 +37,13 @@ function CreateToken() {
 
         try {
             setLoading(true);
-            
             const mintkeyPair = Keypair.generate();
-            console.log({ tokenImageUrl, tokenName, tokenSymbol, description })
-            
             const res = await axios.post('/api/store-uri-data' ,  {
                 name: tokenName,
                 symbol: tokenSymbol,
                 image: tokenImageUrl,
                 description: description,
             });
-            console.log(res.data);
             const uri = await res.data.url;
             
             const metadata = {
@@ -97,8 +94,9 @@ function CreateToken() {
             transaction.recentBlockhash = recentBlock.blockhash;
             transaction.partialSign(mintkeyPair);
             const sign = await wallet.sendTransaction(transaction, connection);
-            console.log(sign);
+            console.log("Transaction signature:", sign);
             console.log(mintkeyPair.publicKey.toBase58());
+            setToken(mintkeyPair.publicKey.toBase58());
         } catch (error) {
             console.error("Error creating token:", error);
             toast.error("Failed to create token. Please check the console for details.");
@@ -122,6 +120,16 @@ function CreateToken() {
                     <InputBox reference={(e) => refInputArr.current[3] = e} text={`Description`} typeOfInp={'text'}/>
                     <Button handleClick={createToken} text={'create token'}/>
                 </div>
+
+                {token && <div className="flex flex-col items-center justify-center mt-8 text-white">
+                    <div className="">
+
+                    Token 
+                    </div>
+                    <div>
+                        {token}
+                    </div>
+                </div>}
             </div>
 
             {loading && (
