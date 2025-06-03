@@ -9,6 +9,7 @@ import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { createInitializeInstruction, pack } from "@solana/spl-token-metadata";
+import axios from "axios";
 
 function CreateToken() {
 
@@ -22,29 +23,41 @@ function CreateToken() {
             console.error("Wallet not connected");
             return;
         }
-        // const tokenName = refInputArr.current[0]?.value;
-        // const tokenSymbol = refInputArr.current[1]?.value;
-        // const tokenImageUrl = refInputArr.current[2]?.value;
-        // const initialSupply = refInputArr.current[3]?.value;
+        const tokenName = refInputArr.current[0]?.value;
+        const tokenSymbol = refInputArr.current[1]?.value;
+        const tokenImageUrl = refInputArr.current[2]?.value;
+        const description = refInputArr.current[3]?.value;
 
-        // if (!tokenName || !tokenSymbol || !tokenImageUrl || !initialSupply) {
-        //     console.error("Please fill in all fields");
-        //     toast.error("Please fill in all fields.");
-        //     return;
-        // }
+        if (!tokenName || !tokenSymbol || !tokenImageUrl || !description) {
+            console.error("Please fill in all fields");
+            toast.error("Please fill in all fields.");
+            return;
+        }
 
         try {
             setLoading(true);
             
             const mintkeyPair = Keypair.generate();
+            console.log({ tokenImageUrl, tokenName, tokenSymbol, description })
+            
+            const res = await axios.post('/api/store-uri-data' ,  {
+                key: mintkeyPair.publicKey.toBase58(),
+                name: tokenName,
+                symbol: tokenSymbol,
+                image: tokenImageUrl,
+                description: description,
+            });
+            console.log(res.data);
+
              const metadata = {
                 mint: mintkeyPair.publicKey,
-                name: 'OPOSSS',
-                symbol: 'OPOSSS',
-                uri: 'https://bafybeidfm65jzvz4zeesxp6ybinkitvpd27klk6yspstrtw5fuy5w27lkq.ipfs.w3s.link/metadata.json',
+                name: tokenName,
+                symbol: tokenSymbol,
+                uri: 'https://wallet-adapter-wine.vercel.app/api/get-data/' + mintkeyPair.publicKey.toBase58(),
                 additionalMetadata: [],
             };
 
+            
             const mintLen = getMintLen([ExtensionType.MetadataPointer]);
             const metadataLen = TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
             const lamports = await connection.getMinimumBalanceForRentExemption(mintLen + metadataLen);
@@ -108,7 +121,7 @@ function CreateToken() {
                     <InputBox reference={(e) => refInputArr.current[0] = e} text={`Token Name`} typeOfInp={'text'}/>
                     <InputBox reference={(e) => refInputArr.current[1] = e} text={`Token Symbol`} typeOfInp={'text'}/>
                     <InputBox reference={(e) => refInputArr.current[2] = e} text={`Token Image URL`} typeOfInp={'text'}/>
-                    <InputBox reference={(e) => refInputArr.current[3] = e} text={`Initial Supply - Eg. 0`} typeOfInp={'text'}/>
+                    <InputBox reference={(e) => refInputArr.current[3] = e} text={`Description`} typeOfInp={'text'}/>
                     <Button handleClick={createToken} text={'create token'}/>
                 </div>
             </div>
