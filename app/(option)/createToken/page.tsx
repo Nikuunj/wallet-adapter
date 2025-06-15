@@ -3,9 +3,9 @@
 import Button from "@/components/Button";
 import InputBox from "@/components/InputBox";
 import Loading from "@/components/Loading";
-import { createInitializeMetadataPointerInstruction, createInitializeMintInstruction, ExtensionType, getMintLen, LENGTH_SIZE, TOKEN_2022_PROGRAM_ID, TYPE_SIZE } from "@solana/spl-token";
+import { createAssociatedTokenAccountInstruction, createInitializeMetadataPointerInstruction, createInitializeMintInstruction, createMintToInstruction, ExtensionType, getAssociatedTokenAddressSync, getMintLen, LENGTH_SIZE, TOKEN_2022_PROGRAM_ID, TYPE_SIZE } from "@solana/spl-token";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
+import { Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { createInitializeInstruction, pack } from "@solana/spl-token-metadata";
@@ -14,10 +14,12 @@ import axios from "axios";
 function CreateToken() {
 
     const refInputArr = useRef<HTMLInputElement[] | null[]>(Array(4).fill(0));
+    const refMint = useRef<HTMLInputElement | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const wallet = useWallet();
     const [token, setToken] = useState<string>('');
     const { connection } = useConnection();
+    const [mintAddress, setMintAddress] = useState<PublicKey>();
 
     async function createToken() {
         if (!wallet.connected || !wallet.publicKey) {
@@ -96,6 +98,7 @@ function CreateToken() {
             const sign = await wallet.sendTransaction(transaction, connection);
             console.log("Transaction signature:", sign);
             console.log(mintkeyPair.publicKey.toBase58());
+            setMintAddress(mintkeyPair.publicKey);
             setToken(mintkeyPair.publicKey.toBase58());
         } catch (error) {
             console.error("Error creating token:", error);
@@ -104,6 +107,63 @@ function CreateToken() {
         } finally {
             setLoading(false);
         }    
+    }
+
+    async function mintToken(){
+
+        console.log(refMint.current?.value);
+        const mintAmout = refMint.current?.value;
+        
+        if(!mintAmout) { 
+            console.error("Enter mint amout");
+            toast.error('Enter Minting Amout');
+            return;
+        }
+        if (!wallet.connected || !wallet.publicKey || !mintAddress) {
+            console.error("Token not minted / Wallet is not connected");
+            return;
+        }
+        
+        try {
+            setLoading(true)
+            const associatedToken = getAssociatedTokenAddressSync(
+            mintAddress,
+            wallet.publicKey,
+            false,
+            TOKEN_2022_PROGRAM_ID,
+        );
+
+         const transaction2 = new Transaction().add(
+            createAssociatedTokenAccountInstruction(
+                wallet.publicKey,
+                associatedToken,
+                wallet.publicKey,
+                mintAddress,
+                TOKEN_2022_PROGRAM_ID,
+            ),
+        );
+
+        await wallet.sendTransaction(transaction2, connection);
+
+        const transaction3 = new Transaction().add(
+            createMintToInstruction(mintAddress, 
+                associatedToken, 
+                wallet.publicKey, 
+                parseInt(mintAmout) * LAMPORTS_PER_SOL, 
+                [], 
+                TOKEN_2022_PROGRAM_ID)
+        );
+
+        await wallet.sendTransaction(transaction3, connection);
+
+        console.log("Minted!")
+        } catch(error) {
+            console.error("Error Minting token:", error);
+            toast.error("Failed to mint token. Please check the console for details.");
+        } finally {
+            setLoading(false)
+        }
+           
     }
 
     return (
@@ -121,16 +181,24 @@ function CreateToken() {
                     <Button handleClick={createToken} text={'create token'}/>
                 </div>
 
-                {token && <div className="flex flex-col items-center justify-center mt-8 text-white">
-                    <div className="">
+                {token && <div className="flex flex-col items-center justify-center mt-8 text-white space-y-2">
+                    <div className="flex flex-col items-center gap-1">
 
-                    Token 
-                    </div>
-                    <div>
-                        {token}
+                        <div className="text-lg font-bold underline decoration-wavy underline-offset-2">
+
+                            Token 
+                        </div>
+                        <div>
+                            {token}
+                        </div>
+                    </div>    
+                    <div className="w-72 gap-2 flex flex-col">
+                        <InputBox reference={(e) => refMint.current = e} text={`Mint Amount`} typeOfInp={'Number'}/>
+                        <Button handleClick={mintToken} text={'Mint Token'} />
                     </div>
                 </div>}
             </div>
+
 
             {loading && (
                 <Loading />

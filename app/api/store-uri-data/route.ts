@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
         });
         // const url = await pinata.gateways.public.get(cid);
         const url = `https://${mainDomain}/ipfs/${cid}/metadata.json`;
-        
+            
         return NextResponse.json({ url } , { status: 200 });
     } catch (error) {
         return NextResponse.json({

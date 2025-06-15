@@ -2,7 +2,7 @@ import CardBox from "@/components/CardBox"
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 h-[85vh]">
+    <div className="flex flex-col items-center justify-center gap-4 min-h-[85vh] my-5">
         <CardBox>{children}</CardBox>
     </div>
   )
