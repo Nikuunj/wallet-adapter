@@ -1,36 +1,218 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# X-AirDrop - Solana Wallet Adapter
 
-## Getting Started
+A modern Solana wallet adapter application built with Next.js that enables seamless wallet connectivity and network switching for Solana-based applications.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🔗 Wallet Integration
+- **Multi-Wallet Support**: Connect with popular Solana wallets (Phantom, Solflare, Backpack, etc.)
+- **Network Switching**: Easy toggle between Devnet, Testnet, and Mainnet
+- **Real-time Connection**: Instant wallet connection status updates
+- **Secure Integration**: Built-in security best practices for wallet interactions
+
+### 🪙 Token Operations
+- **Create Token**: Generate new SPL tokens with custom metadata
+- **Mint Tokens**: Mint additional supply to existing tokens
+- **Token Management**: View and manage your created tokens
+
+### 💸 Transaction Features
+- **Send SOL**: Transfer SOL between wallets with custom amounts
+- **Sign Messages**: Cryptographically sign custom messages
+- **Transaction History**: View recent transaction activity
+
+### 🎁 Utility Features
+- **Airdrop Wallet**: Request SOL airdrops on Devnet/Testnet for development
+- **Balance Checker**: Real-time SOL and token balance display
+- **Modern UI**: Clean and responsive interface built with Next.js
+
+## 🚀 Live Demo
+
+Check out the live application: [https://wallet-adapter-wine.vercel.app/](https://wallet-adapter-wine.vercel.app/)
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Blockchain**: Solana Web3.js
+- **Wallet Integration**: Solana Wallet Adapter
+- **Token Standard**: SPL Token Program
+- **Styling**: Tailwind CSS / CSS Modules
+- **Font**: Geist (Vercel's font family)
+- **Deployment**: Vercel
+
+## 📦 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Nikuunj/wallet-adapter.git
+   cd wallet-adapter
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 🔧 Configuration
+
+The application supports multiple Solana networks. You can switch between:
+- **Devnet** (Development)
+- **Testnet** (Testing)
+- **Mainnet** (Production)
+
+Network switching is available directly in the UI with a simple click.
+
+## 💡 Usage
+
+### 🔗 Wallet Connection
+1. **Connect Wallet**: Click "Select Wallet" to choose your preferred Solana wallet
+2. **Switch Networks**: Use the network selector to change between Devnet, Testnet, and Mainnet
+3. **View Connection Status**: Monitor your wallet connection status in real-time
+
+### 🪙 Token Operations
+1. **Create Token**:
+   - Navigate to the "Create Token" section
+   - Enter token name, symbol, and decimals
+   - Set initial supply and upload metadata
+   - Click "Create Token" to deploy on Solana
+
+2. **Mint Tokens**:
+   - Select an existing token from your list
+   - Enter the amount to mint
+   - Specify recipient address (optional)
+   - Confirm transaction to mint new tokens
+
+### 💸 Transactions
+1. **Send SOL**:
+   - Click on "Send SOL" feature
+   - Enter recipient's wallet address
+   - Specify amount to send
+   - Review and confirm transaction
+
+2. **Sign Message**:
+   - Navigate to "Sign Message" section
+   - Enter custom message text
+   - Click "Sign" to create cryptographic signature
+   - Copy signed message for verification
+
+### 🎁 Development Tools
+1. **Airdrop SOL** (Devnet/Testnet only):
+   - Ensure you're connected to Devnet or Testnet
+   - Click "Request Airdrop"
+   - Receive 1-2 SOL for testing purposes
+   - Note: Mainnet airdrops are not available
+
+## 🔨 Development
+
+### Main Features Implementation
+
+The application includes several key components:
+
+- **`TokenCreator.tsx`**: Handles SPL token creation with metadata
+- **`TokenMinter.tsx`**: Manages token minting operations
+- **`SolSender.tsx`**: Facilitates SOL transfers between wallets
+- **`MessageSigner.tsx`**: Provides message signing capabilities
+- **`AirdropRequest.tsx`**: Handles SOL airdrops for testing
+
+### Development Workflow
+
+1. **Start Development Server**: The main application logic is in `app/page.tsx`
+2. **Hot Reloading**: The page auto-updates as you edit files
+3. **Component Testing**: Test individual features using the component interfaces
+4. **Network Testing**: Switch between networks to test different environments
+
+### Key Development Notes
+
+- **Devnet/Testnet**: Use for development and testing
+- **Mainnet**: Only use for production deployments
+- **Airdrop Limits**: Devnet/Testnet airdrops are rate-limited
+- **Transaction Fees**: All operations require SOL for transaction fees
+
+## 🚀 Deployment
+
+The easiest way to deploy this Next.js app is using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Vercel will automatically build and deploy your application
+
+For other deployment options, check the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## 📚 Learn More
+
+To learn more about the technologies used in this project:
+
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API
+- [Solana Wallet Adapter](https://github.com/solana-labs/wallet-adapter) - Official Solana wallet adapter
+- [Solana Web3.js](https://docs.solana.com/developing/clients/javascript-api) - Solana JavaScript API
+- [SPL Token Program](https://spl.solana.com/token) - Solana Program Library for tokens
+- [Solana Cookbook](https://solanacookbook.com/) - Comprehensive Solana development guide
+- [Learn Next.js](https://nextjs.org/learn) - Interactive Next.js tutorial
+
+### 🔧 Environment Variables
+
+Create a `.env` file in your root directory:
+
+```env
+API_Key=
+API_Secret=
+PINATA_JWT=
+NEXT_PUBLIC_GATEWAY_UR=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📋 Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js 18+ installed
+- A Solana wallet (Phantom, Solflare, etc.)
+- Basic understanding of blockchain concepts
+- SOL tokens for transaction fees (get from faucet for testing)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contributing
 
-## Learn More
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is open source and available under the [MIT License](LICENSE).
 
-## Deploy on Vercel
+## 👤 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Nikuunj**
+- GitHub: [@Nikuunj](https://github.com/Nikuunj)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🙏 Acknowledgments
+
+- [Solana Labs](https://solana.com/) for the wallet adapter library
+- [Vercel](https://vercel.com/) for the deployment platform
+- [Next.js](https://nextjs.org/) for the amazing React framework
+
+---
+
+⭐ If you found this project helpful, please give it a star on GitHub!
