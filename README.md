@@ -123,15 +123,6 @@ Network switching is available directly in the UI with a simple click.
 
 ## 🔨 Development
 
-### Main Features Implementation
-
-The application includes several key components:
-
-- **`TokenCreator.tsx`**: Handles SPL token creation with metadata
-- **`TokenMinter.tsx`**: Manages token minting operations
-- **`SolSender.tsx`**: Facilitates SOL transfers between wallets
-- **`MessageSigner.tsx`**: Provides message signing capabilities
-- **`AirdropRequest.tsx`**: Handles SOL airdrops for testing
 
 ### Development Workflow
 
