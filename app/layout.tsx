@@ -46,8 +46,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-x-hidden min-h-screen min-w-screen`}
       >
         <WalletContexProvide>
-          <NavBar />
-
+          {/* <NavBar /> */}
           {children}
           <Toaster />
         </WalletContexProvide>

@@ -111,7 +111,6 @@ function CreateToken() {
 
     async function mintToken(){
 
-        console.log(refMint.current?.value);
         const mintAmout = refMint.current?.value;
         
         if(!mintAmout) { 
@@ -127,13 +126,13 @@ function CreateToken() {
         try {
             setLoading(true)
             const associatedToken = getAssociatedTokenAddressSync(
-            mintAddress,
-            wallet.publicKey,
-            false,
-            TOKEN_2022_PROGRAM_ID,
-        );
+                mintAddress,
+                wallet.publicKey,
+                false,
+                TOKEN_2022_PROGRAM_ID,
+            );
 
-         const transaction2 = new Transaction().add(
+        const transaction2 = new Transaction().add(
             createAssociatedTokenAccountInstruction(
                 wallet.publicKey,
                 associatedToken,
@@ -142,7 +141,7 @@ function CreateToken() {
                 TOKEN_2022_PROGRAM_ID,
             ),
         );
-
+        
         await wallet.sendTransaction(transaction2, connection);
 
         const transaction3 = new Transaction().add(

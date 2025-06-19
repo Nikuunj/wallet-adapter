@@ -13,7 +13,7 @@ function NavBar() {
     console.log("Network:", solanaContext.network);
     return (
         <>
-            <div className="flex justify-between items-center py-2  px-5 text-white nav "> 
+            <div className="flex justify-between items-center py-2  px-5 text-white nav w-screen "> 
                 <div className="text-base sm:text-3xl flex justify-center items-center gap-1 sm:gap-3">
                     <Logo /> X-AirDrop
                 </div>
@@ -28,7 +28,7 @@ function NavBar() {
             </div>
             <hr className="text-gray-300"/>
             
-            <div className=" flex justify-start items-center mt-3 px-5 tracking-wider nav">
+            <div className=" flex justify-start items-center mt-3 px-5 tracking-wider nav ">
                 <div className="flex justify-center items-center gap-2">
                     <div>
                         <Button text={solanaContext.network} handleClick={solanaContext.toggleNetwork}/>
