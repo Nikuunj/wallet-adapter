@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import NavBar from "@/components/NavBar";
+// import NavBar from "@/components/NavBar";
 import WalletContexProvide from "@/components/WalletContexProvide";
 import '@solana/wallet-adapter-react-ui/styles.css';
 

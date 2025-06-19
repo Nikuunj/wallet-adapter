@@ -50,6 +50,7 @@ export function PointerHighlight({
       {dimensions.width > 0 && dimensions.height > 0 && (
         <motion.div
           className="pointer-events-none absolute inset-0 z-0"
+          // @ts-expect-error originX is not found
           initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -70,6 +71,8 @@ export function PointerHighlight({
             transition={{
               duration: 1,
               ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 7,
             }}
           />
           <motion.div
@@ -87,6 +90,8 @@ export function PointerHighlight({
               opacity: { duration: 0.1, ease: "easeInOut" },
               duration: 1,
               ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 7,
             }}
           >
             <Pointer
