@@ -9,7 +9,7 @@ const CornerBorderBox: React.FC<Props> = ({ children, className = '' }) => {
      return (
           <div className={`relative ${className}`}>
                {/* Corner borders on top */}
-               <BorderSpotlight>
+               <BorderSpotlight opticity="45">
                     <span className="corner top-left z-30"></span>
                     <span className="corner top-right z-30"></span>
                     <span className="corner bottom-left z-30"></span>

@@ -1,18 +1,18 @@
 "use client"
 
+import { ReactNode, useRef } from "react";
 import {
     motion,
     useMotionValue,
     useMotionTemplate,
     animate,
 } from "framer-motion"
-import { ReactNode, useRef } from "react";
 
 
 interface BorderSpotlightProps {
     children: ReactNode;
     className?: string;
-    opticity?: string
+    opticity: string
 }
 
 function BorderSpotlight({ children, className = "", opticity = "45", ...props }: BorderSpotlightProps) {
@@ -38,7 +38,7 @@ function BorderSpotlight({ children, className = "", opticity = "45", ...props }
                          })
                     }}
                     onHoverEnd={() => {
-                         animate(maskSize, 15, {
+                         animate(maskSize, 13, {
                          duration: 0.3,
                          ease: "easeIn",
                          })
@@ -51,8 +51,8 @@ function BorderSpotlight({ children, className = "", opticity = "45", ...props }
                          }
                     }}
                     style={{
-                         WebkitMaskImage: useMotionTemplate`radial-gradient(circle ${maskSize}px at ${maskX}px ${maskY}px, black 0%, black 30%, transparent 100%)`,
-                         maskImage: useMotionTemplate`radial-gradient(circle ${maskSize}px at ${maskX}px ${maskY}px, black 0%, black 30%, transparent 100%)`,
+                         WebkitMaskImage: useMotionTemplate`radial-gradient(circle ${maskSize}px at ${maskX}px ${maskY}px, black 0%, black 40%, transparent 100%)`,
+                         maskImage: useMotionTemplate`radial-gradient(circle ${maskSize}px at ${maskX}px ${maskY}px, black 0%, black 40%, transparent 100%)`,
                     }}
                     {...props}
                >
