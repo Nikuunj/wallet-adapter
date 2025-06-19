@@ -15,8 +15,8 @@ function HeroSection() {
                          <FloatingText text={'Solana Wallet'} />
                          {" "} <PointerHighlight>Experience</PointerHighlight>
                     </p>
-                    <SpotlightText>
-                         <p className={"text-sm sm:text-lg px-5 sm:px-18 md:px-28 lg:px-44 text-zinc-300"}>
+                    <SpotlightText className="flex justify-center items-center">
+                         <p className={"text-sm sm:text-lg px-5  w-80 sm:w-lg md:w-xl lg:w-2xl  text-zinc-300"}>
                                    Create tokens, mint NFTs, send SOL, sign messages, and manage all your Solana assets in one powerful web application. Full support for mainnet, devnet, and testnet networks.
                          </p>
                     </SpotlightText>

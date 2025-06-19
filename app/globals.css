@@ -10,6 +10,42 @@
     font-weight: 550;
 }
 
+.corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+}
+
+.corner.top-left {
+  top: 0;
+  left: 0;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+}
+
+.corner.top-right {
+  top: 0;
+  right: 0;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+}
+
+.corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+}
+
+.corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+}
+
+
 
 
 @layer utilities {
