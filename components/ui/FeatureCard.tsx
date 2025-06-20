@@ -2,7 +2,7 @@ import { SpotlightText } from "./SpotlightText"
 import { motion } from "framer-motion";
 
 
-function FeatureHero({ icon, title, describe }: { icon: React.ReactNode, title: string, describe: string}) {
+function FeatureCard({ icon, title, describe }: { icon: React.ReactNode, title: string, describe: string}) {
      return (
           <div className="flex flex-col max-w-72 md:max-w-96 text-start  justify-start  items-start space-y-4">
                <div className={"font-bold text-2xl flex items-center justify-start gap-3"}>
@@ -29,4 +29,4 @@ function FeatureHero({ icon, title, describe }: { icon: React.ReactNode, title: 
      )
 }
 
-export default FeatureHero
+export default FeatureCard
