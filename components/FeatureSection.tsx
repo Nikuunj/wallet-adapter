@@ -11,7 +11,7 @@ import { features } from "@/utils/feature"
 function FeatureSection() {
 
      const featureRender = features.map((item, idx) => (
-          <CornerBorderSpotlight key={item.description + idx} borderStyle="dashed" className="px-5 py-5 md:px-8 md:py-8 w-fit bg-black/45">
+          <CornerBorderSpotlight key={item.description + idx} borderStyle={true} className="px-5 py-5 md:px-8 md:py-8 w-fit bg-black/45">
                <FeatureCard icon={item.icon} title={item.title}
                describe={item.description}
                />

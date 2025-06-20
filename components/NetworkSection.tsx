@@ -6,7 +6,7 @@ import WorkCard from "./ui/WorkCard"
 
 function NetworkSection() {
      const renderNetwork = networks.map((net, idx) => (
-          <CornerBorderSpotlight borderStyle="dashed" key={net.name + idx} className=" p-10 h-full w-full bg-black/45">
+          <CornerBorderSpotlight borderStyle={true} key={net.name + idx} className=" p-10 h-full w-full bg-black/45">
                <WorkCard icon={net.icon} title={net.name}
                     describe={net.status}/>
           </CornerBorderSpotlight>
