@@ -1,8 +1,10 @@
+"use client"
 import { whyChoose } from "@/utils/network"
 import SecondaryHeader from "./ui/SecondaryHeader"
 import { SpotlightText } from "./ui/SpotlightText"
 import CornerBorderSpotlight from "./ui/CornerBorderSpotlight"
 import QuickAction from "./ui/QuickAction"
+import { motion } from "framer-motion"
 
 function WhyChooseSection() {
     return (
@@ -18,7 +20,11 @@ function WhyChooseSection() {
                          </SpotlightText>
                          <div className="space-y-5 px-2 sm:px-0">
                               {whyChoose.map((resson, idx) => (
-                                   <div key={resson.text + idx} className={"flex gap-2 relative left-0 hover:left-2 duration-300 transition-all items-center"}>
+                                   <motion.div
+                                   initial={{ opacity: 0, x: 20 }}
+                                   whileInView={{ opacity: 1, x: 0 }}
+                                   transition={{ duration: 0.3 + 0.1 * idx }}
+                                   key={resson.text + idx} className={"flex gap-2 relative left-0 hover:left-2 duration-300 transition-all items-center"}>
                                         <span className="drop-shadow-[0_0_6px_rgba(167,139,250,0.85)]">
                                              {resson.icon}
                                         </span>
@@ -27,7 +33,7 @@ function WhyChooseSection() {
                                                   {resson.text}
                                              </p>
                                         {/* </SpotlightText> */}
-                                   </div>
+                                   </motion.div>
                               ))}
                          </div>
                     </div>

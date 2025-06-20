@@ -1,10 +1,16 @@
+"use client"
 import FloatingText from "./FloatingText"
+import { motion } from 'motion/react'
 
 
 function SecondaryHeader({ startNormalText, secondNormalText, lastNormalText, midColorText, startColorText, lastColorText }: 
      { startNormalText: string; secondNormalText?: string; lastColorText?: string; midColorText?: string; startColorText?: string; lastNormalText?: string }) {
      return (
-          <p className={"text-2xl sm:text-4xl md:text-4xl font-bold"}>
+          <motion.p
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6 }}
+               className={"text-2xl sm:text-4xl md:text-4xl font-bold"}>
                {startColorText && <>
                     <FloatingText text={startColorText} /> 
                     {' '}
@@ -23,7 +29,7 @@ function SecondaryHeader({ startNormalText, secondNormalText, lastNormalText, mi
                     {' '}
                </>}
                {lastNormalText && <>{' '}{lastNormalText}</> }
-          </p>
+          </motion.p>
   )
 }
 

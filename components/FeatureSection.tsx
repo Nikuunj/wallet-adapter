@@ -6,6 +6,7 @@ import MagnaticCursor from "./ui/MagnaticCursor"
 import SecondaryHeader from "./ui/SecondaryHeader"
 import { SpotlightText } from "./ui/SpotlightText"
 import { features } from "@/utils/feature"
+import { motion } from "framer-motion"
 
 
 function FeatureSection() {

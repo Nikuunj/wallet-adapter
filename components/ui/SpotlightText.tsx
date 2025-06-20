@@ -20,7 +20,11 @@ export function SpotlightText({ children, className = "", ...props }: SpotlightT
     const ref = useRef<HTMLDivElement>(null)
 
     return (
-        <div className="relative">
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="relative">
             {/* Base layer - always visible with reduced opacity/darker */}
             <div className={`${className} opacity-45`}>
                 {children}
@@ -57,6 +61,6 @@ export function SpotlightText({ children, className = "", ...props }: SpotlightT
             >
                 {children}
             </motion.div>
-        </div>
+        </motion.div>
     )
 }
