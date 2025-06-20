@@ -15,6 +15,7 @@
   width: 7px;
   height: 7px;
   pointer-events: none;
+  opacity: 0.6;
 }
 
 .corner.top-left {

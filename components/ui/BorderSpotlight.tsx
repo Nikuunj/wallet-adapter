@@ -12,10 +12,9 @@ import {
 interface BorderSpotlightProps {
     children: ReactNode;
     className?: string;
-    opticity: string
 }
 
-function BorderSpotlight({ children, className = "", opticity = "45", ...props }: BorderSpotlightProps) {
+function BorderSpotlight({ children, className = "", ...props }: BorderSpotlightProps) {
      const maskX = useMotionValue(0)
      const maskY = useMotionValue(0)
      const maskSize = useMotionValue(0)
@@ -23,7 +22,7 @@ function BorderSpotlight({ children, className = "", opticity = "45", ...props }
      return (
           <div className="">
                {/* Base layer - always visible with reduced opacity/darker */}
-               <div className={`${className} opacity-${opticity}`}>
+               <div className={`${className} opacity-35`}>
                     {children}
                </div>
                
