@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 // import NavBar from "@/components/NavBar";
 import WalletContexProvide from "@/components/WalletContexProvide";
 import '@solana/wallet-adapter-react-ui/styles.css';
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,13 +44,14 @@ export default function RootLayout({
         </style>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-x-hidden min-h-screen min-w-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-x-hidden min-h-screen min-w-screen scroll-smooth`}
       >
         <WalletContexProvide>
           {/* <NavBar /> */}
           {children}
           <Toaster />
         </WalletContexProvide>
+        <Analytics/>
       </body>
     </html>
   );

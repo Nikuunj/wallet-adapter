@@ -14,8 +14,8 @@ function WorksSection() {
         </CornerBorderSpotlight>
     ))
     return (
-        <div className="z-20 text-center w-screen space-y-10">
-            <div className="space-y-5">
+        <div className="z-20 text-center w-screen space-y-16">
+               <div className="space-y-7">
 
                 <SecondaryHeader startNormalText={"it Works"} startColorText={"How"}/>
                 <SpotlightText className="flex justify-center items-center">
@@ -29,7 +29,7 @@ function WorksSection() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 sm:gap-x-5 md:gap-x-8 px-2">
                         {renderHowWork}
                     </div>
-               </div>
+            </div>
         </div>
     )
 }

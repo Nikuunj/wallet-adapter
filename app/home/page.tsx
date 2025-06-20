@@ -3,6 +3,8 @@ import FeatureSection from "@/components/FeatureSection"
 import WorksSection from "@/components/WorksSection"
 import { GridSmallBackground } from "@/components/ui/GridSmallBackground"
 import NetworkSection from "@/components/NetworkSection"
+import WhyChooseSection from "@/components/WhyChooseSection"
+import LastSection from "@/components/LastSection"
 
 function page() {
      return (
@@ -15,6 +17,9 @@ function page() {
                          <FeatureSection />
                          <WorksSection />
                          <NetworkSection />
+                         <WhyChooseSection />
+                         <LastSection />
+                         <div />
                     </div>
                </div>
           </div>

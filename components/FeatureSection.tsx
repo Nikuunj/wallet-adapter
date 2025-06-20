@@ -20,7 +20,7 @@ function FeatureSection() {
 
      return (
           <div className="z-20 text-center w-screen space-y-10">
-               <div className="space-y-5">
+               <div className="space-y-9">
                     <SecondaryHeader startNormalText={"Everything You Need for"}   lastColorText={"Solana"}/>
                     <SpotlightText className="flex justify-center items-center">
                          <p className={"text-sm sm:text-base md:text-lg w-72 sm:w-96 md:w-lg text-zinc-300 text-center"}>

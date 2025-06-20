@@ -68,6 +68,8 @@ function FausetSol() {
 
     if (!mounted) return null; 
 
+
+// when wallet is not connected
     if(!publicKey) {
         return (
         <div className="flex flex-col items-center justify-center gap-4">
