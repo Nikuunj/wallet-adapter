@@ -4,7 +4,7 @@ import BorderSpotlight from "./BorderSpotlight";
 interface Props {
      children: React.ReactNode;
      className?: string;
-     borderStyle?: boolean
+     borderStyle?: string
 }
 
 const CornerBorderSpotlight: React.FC<Props> = ({ children, borderStyle, className = '' }) => {
@@ -14,7 +14,7 @@ const CornerBorderSpotlight: React.FC<Props> = ({ children, borderStyle, classNa
                <BorderCorners />
                <BorderSpotlight>
                     {/* Box with dotted border under the corners */}
-                    <div className={`absolute inset-0 border ${borderStyle ? 'border-dashed' : ''}  border-red-300/70 z-10`} />
+                    <div className={`absolute inset-0 border ${borderStyle}  z-10 border-red-300/70`} />
                </BorderSpotlight>
                {/* Children */}
                <div className="relative z-20 w-full h-full">
