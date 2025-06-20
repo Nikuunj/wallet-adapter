@@ -1,3 +1,4 @@
+import HeroButton from "./ui/HeroButton"
 import SecondaryHeader from "./ui/SecondaryHeader"
 import { SpotlightText } from "./ui/SpotlightText"
 
@@ -12,6 +13,7 @@ function LastSection() {
                         </p>
                 </SpotlightText>
             </div>
+            <HeroButton text={'Connect Wallet'}/> 
         </div>
     )
 }
