@@ -19,7 +19,7 @@ const CornerBorderBox: React.FC<Props> = ({ children, className = '' }) => {
                     <div className="absolute inset-0 border border-dashed border-red-300/70 z-10" />
                </BorderSpotlight>
                {/* Children */}
-               <div className="relative z-20 w-full h-full flex items-center justify-center">
+               <div className="relative z-20 w-full h-full">
                     {children}
                </div>
           </div>

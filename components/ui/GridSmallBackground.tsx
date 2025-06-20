@@ -8,7 +8,7 @@ export function GridSmallBackground() {
         className={cn(
           "absolute inset-0",
           "[background-size:5px_5px]",
-          "[background-image:linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)]",
+          "[background-image:linear-gradient(to_right,#141414_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)]",
         )}
       />
       {/* Radial gradient for the container to give a faded look */}
