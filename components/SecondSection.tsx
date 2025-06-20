@@ -1,5 +1,4 @@
 "use client"
-import { Coins, FileSignature, Zap } from "lucide-react"
 import CornerBorderBox from "./ui/CornerBorderBox"
 import FeatureHero from "./ui/FeatureHero"
 import FloatingText from "./ui/FloatingText"
@@ -12,7 +11,7 @@ import { features } from "@/utils/feature"
 function SecondSection() {
 
      const featureRender = features.map((item, idx) => (
-          <CornerBorderBox className="px-5 py-5 md:px-8 md:py-8 w-fit bg-black/45">
+          <CornerBorderBox key={item.description + idx} className="px-5 py-5 md:px-8 md:py-8 w-fit bg-black/45">
                <FeatureHero icon={item.icon} title={item.title}
                describe={item.description}
                />
