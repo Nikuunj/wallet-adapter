@@ -24,7 +24,9 @@ export function SpotlightText({ children, className = "", ...props }: SpotlightT
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="relative">
+            
             {/* Base layer - always visible with reduced opacity/darker */}
             <div className={`${className} opacity-45`}>
                 {children}

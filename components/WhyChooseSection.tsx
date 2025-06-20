@@ -24,6 +24,7 @@ function WhyChooseSection() {
                                    initial={{ opacity: 0, x: 20 }}
                                    whileInView={{ opacity: 1, x: 0 }}
                                    transition={{ duration: 0.3 + 0.1 * idx }}
+                                   viewport={{ once: true }}
                                    key={resson.text + idx} className={"flex gap-2 relative left-0 hover:left-2 duration-300 transition-all items-center"}>
                                         <span className="drop-shadow-[0_0_6px_rgba(167,139,250,0.85)]">
                                              {resson.icon}

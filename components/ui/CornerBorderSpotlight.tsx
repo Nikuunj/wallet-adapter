@@ -15,6 +15,7 @@ const CornerBorderSpotlight: React.FC<Props> = ({ children, borderStyle, classNa
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className={`relative ${className}`}>
                {/* Corner borders on top */}
                <BorderCorners />

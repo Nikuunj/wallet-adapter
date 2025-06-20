@@ -17,6 +17,7 @@ function HeroSection() {
                          initial={{ opacity: 0, y: 20 }}
                          whileInView={{ opacity: 1, y: 0 }}
                          transition={{ duration: 0.4 }}
+                         viewport={{ once: true }}
                          className={"text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"}>
                          Your Ultimate {" "}
                          <FloatingText text={'Solana Wallet'} />
@@ -36,6 +37,7 @@ function HeroSection() {
                          initial={{ opacity: 0, y: 20 }}
                          whileInView={{ opacity: 1, y: 0 }}
                          transition={{ duration: 0.8 }}
+                         viewport={{ once: true }}
                          className={"text-sm sm:text-lg sm:px-5  w-72 sm:w-lg md:w-xl lg:w-2xl  text-zinc-300"}
                     >
                          <HeroTikeMark strArr={['Web-Based dApp', 'No Installation', 'Multi-Network']} />
