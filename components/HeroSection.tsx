@@ -16,7 +16,7 @@ function HeroSection() {
                          {" "} <PointerHighlight>Experience</PointerHighlight>
                     </p>
                     <SpotlightText className="flex justify-center items-center">
-                         <p className={"text-sm sm:text-lg px-5  w-80 sm:w-lg md:w-xl lg:w-2xl  text-zinc-300"}>
+                         <p className={"text-sm sm:text-lg sm:px-5  w-72 sm:w-lg md:w-xl lg:w-2xl  text-zinc-300"}>
                                    Create tokens, mint NFTs, send SOL, sign messages, and manage all your Solana assets in one powerful web application. Full support for mainnet, devnet, and testnet networks.
                          </p>
                     </SpotlightText>
