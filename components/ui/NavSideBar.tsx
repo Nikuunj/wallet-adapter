@@ -3,10 +3,40 @@
 import { navLink } from "@/utils/navLinks";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
+import { useSolanaNetwork } from "../WalletContexProvide";
+import ToggleButton from "./ToggleButton";
 
 function NavSideBar({ isOpen, closeOpen }: { isOpen: boolean, closeOpen: Dispatch<SetStateAction<boolean>>}) {
      const route = useRouter();
+     const [devToMain, setDevToMain] = useState<boolean>(false);
+     const [devToTest, setDevToTest] = useState<boolean>(false);
+
+     const { network, toggleNetwork } = useSolanaNetwork();
+
+     function changeToggleMainToDevNetwork() {
+          if(network === 'mainnet') {
+               setDevToMain(true)
+               if(devToTest) {
+                    toggleNetwork('testnet')
+               } else {
+                    toggleNetwork('devnet')
+               }
+          } else {
+               setDevToMain(false)
+               toggleNetwork('mainnet')
+          }
+     }
+
+     function toggleTestToDev() {
+          if(devToTest) {
+               toggleNetwork('devnet')
+               setDevToTest(false)
+          } else {
+               toggleNetwork('testnet')
+               setDevToTest(true)
+          }
+     }
 
      function handleRouting(str: string) {
           route.push(str)
@@ -30,8 +60,19 @@ function NavSideBar({ isOpen, closeOpen }: { isOpen: boolean, closeOpen: Dispatc
                     <div className="w-fit cursor-pointer drop-shadow-[0_0_6px_rgba(167,139,250,1)]" onClick={() => closeOpen(false)}>
                          <ChevronRight className="h-6.5 w-6.5 sm:w-7.5 sm:h-7.5 md:w-9 md:h-9"/>
                     </div>
-                    <div className="space-y-3 flex flex-col ps-2 sm:ps-5 w-full">
+                    <div className="space-y-5 flex flex-col ps-2 sm:ps-5 w-full">
                          {renderNavLink}
+                         <div className="flex gap-2 capitalize items-center">
+                              <ToggleButton isOn={devToMain} toggleSwitch={changeToggleMainToDevNetwork} /> 
+                              { !devToMain ? 'Production' : 'Development' }
+                         </div>
+
+                         { devToMain && 
+                              <div className="flex gap-2 capitalize items-center">
+                                   <ToggleButton isOn={devToTest} toggleSwitch={toggleTestToDev} /> 
+                                   {network}
+                              </div>
+                         }
                     </div>
                </div>
           </div>

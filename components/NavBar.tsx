@@ -10,7 +10,7 @@ function NavBar() {
     const route = useRouter();
 
     function handleClick() {
-        setOpen(pre => !pre)
+        setOpen(true)
     }
 
     return (

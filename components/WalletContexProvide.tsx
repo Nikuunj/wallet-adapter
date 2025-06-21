@@ -8,7 +8,7 @@ type NetworkType = 'testnet' | 'devnet' | 'mainnet';
 interface SolanaNetworkContextType {
     network: NetworkType;
     setNetwork: (net: NetworkType) => void;
-    toggleNetwork: () => void;
+    toggleNetwork: (str : NetworkType) => void;
 }
 
 const SolanaNetworkContext = createContext<SolanaNetworkContextType | undefined>(undefined);
@@ -21,21 +21,23 @@ export const useSolanaNetwork = () => {
 
 
 function WalletContexProvide({ children }: { children: React.ReactNode }) {
-    const [network, setNetwork] = useState<NetworkType>('devnet');
+    const [network, setNetwork] = useState<NetworkType>('mainnet');
 
     const rpcEndpoint = useMemo(() => {
         switch (network) {
             case 'devnet':
                 return 'https://api.devnet.solana.com';
+            case 'mainnet':
+                return 'https://api.mainnet-beta.solana.com';
             default:
                 return 'https://api.testnet.solana.com';
         }
     }, [network]);
 
-    const toggleNetwork = () => {
-        setNetwork(prev => prev === 'testnet' ? 'devnet' : 'testnet');
+    const toggleNetwork = (str: 'devnet' | 'testnet' | 'mainnet') => {
+        setNetwork(str);
     };
-        
+    
     return (
         <SolanaNetworkContext.Provider value={{ network, setNetwork, toggleNetwork }}>
             <ConnectionProvider endpoint={rpcEndpoint}>
