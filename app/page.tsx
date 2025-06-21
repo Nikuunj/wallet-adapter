@@ -1,30 +1,29 @@
-'use client';
-import { useEffect, useState } from 'react';
-import FausetSol from '@/components/FausetSol';
-import CardBox from '@/components/CardBox';
-import SecondOption from '@/components/SecondOption';
-import { useWallet } from '@solana/wallet-adapter-react';
+import HeroSection from "@/components/HeroSection"
+import FeatureSection from "@/components/FeatureSection"
+import WorksSection from "@/components/WorksSection"
+import { GridSmallBackground } from "@/components/ui/GridSmallBackground"
+import NetworkSection from "@/components/NetworkSection"
+import WhyChooseSection from "@/components/WhyChooseSection"
+import LastSection from "@/components/LastSection"
 
-export default function Home() {
-    const [mounted, setMounted] = useState(false);
-    const { connected } = useWallet();
-    
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) return null; 
-
-    return (
-        <div className="flex flex-col items-center justify-center gap-4 mt-4 px-2">
-            <div className='normal flex gap-4 flex-col'>
-                <CardBox>
-                    <FausetSol />
-                </CardBox>
-                { connected && <CardBox>
-                    <SecondOption />
-                </CardBox>}
-            </div>
-        </div>
-    );
+function page() {
+     return (
+          <div>
+               <HeroSection />
+               <div className="">
+                    <GridSmallBackground />
+                    <div className="h-10 bg-gradient-to-b w-screen from-black via-black/60 to-transparent z-20 relative" />
+                    <div className="z-20 relative space-y-28">
+                         <FeatureSection />
+                         <WorksSection />
+                         <NetworkSection />
+                         <WhyChooseSection />
+                         <LastSection />
+                         <div />
+                    </div>
+               </div>
+          </div>
+     )
 }
+
+export default page

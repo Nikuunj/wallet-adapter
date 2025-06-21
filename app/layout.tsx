@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-// import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar";
 import WalletContexProvide from "@/components/WalletContexProvide";
 import '@solana/wallet-adapter-react-ui/styles.css';
 import { Analytics } from "@vercel/analytics/next"
@@ -41,13 +41,14 @@ export default function RootLayout({
       <head>
         <style>
             {`@import url("https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap");`}
+            {`@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');`}
         </style>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 text-base overflow-x-hidden min-h-screen min-w-screen scroll-smooth`}
       >
         <WalletContexProvide>
-          {/* <NavBar /> */}
+          <NavBar />
           {children}
           <Toaster />
         </WalletContexProvide>

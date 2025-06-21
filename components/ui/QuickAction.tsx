@@ -29,29 +29,17 @@ function QuickAction() {
 
   return (
     <div className="space-y-3">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+      <div
         className="text-center mb-4"
       >
         <h3 className="text-xl font-semibold text-white mb-2 text-start flex gap-2 items-center">
           <Sparkles className="h-5 w-5 text-yellow-500 drop-shadow-[0_0_6px_rgba(167,139,250,0.85)]" /> Quick Actions
         </h3>
-      </motion.div>
+      </div>
 
       {actions.map((action, index) => (
-        <motion.div
+        <div
           key={index}
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ 
-            delay: index * 0.1 + 0.3,
-            duration: 0.5,
-            ease: "easeOut"
-          }}
-          viewport={{ once: true }}
           className="w-full"
         >
           <motion.button
@@ -102,7 +90,7 @@ function QuickAction() {
             {/* Bottom border glow effect */}
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-transparent via-zinc-400 to-transparent group-hover:w-full transition-all duration-500" />
           </motion.button>
-        </motion.div>
+        </div>
       ))}
     </div>
   )
