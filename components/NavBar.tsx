@@ -3,11 +3,17 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import NavSideBar from "./ui/NavSideBar"
 import { useRouter } from "next/navigation"
+import { BaseWalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { CONNECT_LABELS } from "@/utils/labest";
+import HeroButton from "./ui/HeroButton";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 
 
 function NavBar() {
-    const [open, setOpen] = useState<boolean>(true)
+    const [open, setOpen] = useState<boolean>(false)
     const route = useRouter();
+    const wallet = useWallet();
 
     function handleClick() {
         setOpen(true)
@@ -24,8 +30,17 @@ function NavBar() {
                     a
                 </div>
             </div>
-            <div onClick={handleClick} className={"cursor-pointer"}>
+            <div className={"flex gap-2"}>
+
+                <div className="cursor-pointer flex items-center">
+                    <BaseWalletMultiButton labels={CONNECT_LABELS} style={{ background: 'transparent', padding:0, height:'fit-content'}}>
+                        <HeroButton extraClass={"px-2 py-1 text-xs"} text={wallet.connected && wallet.publicKey ? wallet.publicKey.toBase58().slice(0,3)+".."+ wallet.publicKey.toBase58().slice(-3)
+                            : 'Connect' }/>
+                    </BaseWalletMultiButton> 
+                </div>
+                <div onClick={handleClick} className={"cursor-pointer justify-center"}>
                     <Menu className="h-6.5 w-6.5 sm:w-7.5 sm:h-7.5 md:w-9 md:h-9 drop-shadow-[0_0_6px_rgba(167,139,250,1)]"/>
+                </div>
             </div>
             <NavSideBar isOpen={open} closeOpen={setOpen} />
         </div>
