@@ -1,31 +1,39 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Coins, Send, Sparkles, Wallet, Zap } from "lucide-react"
+import { Coins, FileSignature, Send, Sparkles, Zap } from "lucide-react"
+import { useRouter } from "next/navigation";
 
 function QuickAction() {
+  const route = useRouter();
+
   const actions = [
-    { 
-      icon: Wallet, 
-      text: "Connect Wallet",
-      iconColor: "text-blue-400",
-    },
     { 
       icon: Coins, 
       text: "Create New Token",
       iconColor: "text-yellow-400",
+      to: '/createToken',
     },
     { 
       icon: Send, 
       text: "Send SOL",
       iconColor: "text-green-400",
+      to: '/sendsol',
+    },
+    { 
+      icon: FileSignature, 
+      text: "Sign Messages",
+      iconColor: "text-green-500",
+      to: '/signmsg',
     },
     { 
       icon: Zap, 
       text: "Get Test SOL",
       iconColor: "text-purple-400",
+      to: '/airdrop',
     },
   ]
+
 
   return (
     <div className="space-y-3">
@@ -49,6 +57,7 @@ function QuickAction() {
             }}
             whileTap={{ scale: 0.98 }}
             className="w-full group relative overflow-hidden rounded-lg border border-zinc-700/50 hover:border-zinc-600/70 transition-all duration-300"
+            onClick={() => route.push(action.to)}
           >
             {/* Background gradient */}
             <div className={`absolute inset-0 bg-gradient-to-r transition-all duration-300`} />

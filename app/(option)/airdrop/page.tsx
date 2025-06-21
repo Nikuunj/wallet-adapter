@@ -1,7 +1,9 @@
+"use client"
+import FausetSol from "@/components/FausetSol"
 
 function AirDrop() {
      return (
-          <div>Air drop</div>
+          <div><FausetSol /></div>
      )
 }
 

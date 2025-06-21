@@ -23,7 +23,7 @@ export const navLink: navLinkType[] = [
      {
           title: "Mint Token",
           Icon: <Zap className="h-5 w-5 text-yellow-500" />,
-          to: '/createToken',
+          to: '/mintToken',
           color: 'text-yellow-500'
      },
      {

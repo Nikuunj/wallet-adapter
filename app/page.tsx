@@ -20,6 +20,7 @@ function page() {
                          <WhyChooseSection />
                          <LastSection />
                          <div />
+                         {/* <Footer /> */}
                     </div>
                </div>
           </div>

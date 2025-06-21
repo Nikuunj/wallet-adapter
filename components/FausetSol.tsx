@@ -1,5 +1,4 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -7,6 +6,7 @@ import Button from "./Button";
 import InputBox from "./InputBox";
 import Spyder from "./icons/Spyder";
 import Loading from "./Loader";
+import { useSolanaNetwork } from "./WalletContexProvide";
 
 function FausetSol() {
     const { publicKey } = useWallet();
@@ -15,6 +15,7 @@ function FausetSol() {
     const [balance, setBalance] = useState<number | null>(null);
     const [mounted, setMounted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { network } = useSolanaNetwork();
 
     const getBalance = useCallback(async () => {
         if (!publicKey) return;
@@ -69,26 +70,18 @@ function FausetSol() {
     if (!mounted) return null; 
 
 
-// when wallet is not connected
-    if(!publicKey) {
-        return (
-        <div className="flex flex-col items-center justify-center gap-4">
-            <WalletMultiButton />
-            Please connect your wallet to use the faucet.
-        </div>
-    )}
 
     return (
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-5">
 
-            <div className="text-xl text-white text-wrap">Wallet Address : <span className="tracking-wider"> {publicKey.toBase58()} </span><br /> 
+            <div className="text-xl text-white text-wrap break-words w-72">Wallet Address : <span className="tracking-wider"> {publicKey && publicKey.toBase58()} </span><br /> 
                 <span className="text-base font-extralight text-gray-500"> Maximum of 2 requests every 8 hours</span>
             </div>
             <div className="w-72">
                 <InputBox reference={(e) => refInput.current = e} text={"SOL - Amount"} typeOfInp={"text"}/>
             </div>
-            <div className="w-72">
-                <Button handleClick={handleAirdrop} text={<div className="flex justify-center items-center gap-2"><Spyder/> Air Drop</div>} />
+            <div className={`w-72`}>
+                <Button handleClick={network === 'mainnet' ? () => toast.error('Only Happen on Devnet or Testnet') : handleAirdrop} text={<div className={`flex justify-center items-center gap-2  ${network !== 'mainnet' && 'cursor-not-allowed'}`}><Spyder/> Air Drop</div>} />
             </div>
             <div>
                 Balance: {balance ? balance / LAMPORTS_PER_SOL : 0} SOL

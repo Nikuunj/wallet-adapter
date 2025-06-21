@@ -167,12 +167,12 @@ function CreateToken() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center gap-4 w-72">
-                <div className="text-xl text-white font-semibold tracking-wider">
+            <div className="flex flex-col items-center justify-center gap-5 w-72">
+                <div className="font-bold text-2xl  tracking-wide">
                     Create Token
                 </div>
                 
-                <div className="w-72 gap-2 flex flex-col">
+                <div className="w-72 gap-3.5 flex flex-col">
                     <InputBox reference={(e) => refInputArr.current[0] = e} text={`Token Name`} typeOfInp={'text'}/>
                     <InputBox reference={(e) => refInputArr.current[1] = e} text={`Token Symbol`} typeOfInp={'text'}/>
                     <InputBox reference={(e) => refInputArr.current[2] = e} text={`Token Image URL`} typeOfInp={'text'}/>
@@ -180,18 +180,18 @@ function CreateToken() {
                     <Button handleClick={createToken} text={'create token'}/>
                 </div>
 
-                {token && <div className="flex flex-col items-center justify-center mt-8 text-white space-y-2">
-                    <div className="flex flex-col items-center gap-1">
+                {token && <div className="flex flex-col items-center justify-center mt-8 text-white space-y-7">
+                    <div className="flex flex-col items-center gap-2">
 
                         <div className="text-lg font-bold underline decoration-wavy underline-offset-2">
 
                             Token 
                         </div>
-                        <div>
+                        <p className="break-words text-wrap w-72">
                             {token}
-                        </div>
+                        </p>
                     </div>    
-                    <div className="w-72 gap-2 flex flex-col">
+                    <div className="w-72 gap-5 flex flex-col">
                         <InputBox reference={(e) => refMint.current = e} text={`Mint Amount`} typeOfInp={'Number'}/>
                         <Button handleClick={mintToken} text={'Mint Token'} />
                     </div>

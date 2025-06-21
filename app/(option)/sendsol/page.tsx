@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import InputBox from "@/components/InputBox";
-import Loading from "@/components/Loader";
+import Loader from "@/components/Loader";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react"
@@ -68,7 +68,6 @@ function SendSol() {
                     recentBlockhash: blockhash,
                     feePayer: pubkey,
                 });
-
                 // Dummy transfer to self just to estimate fee
                 transaction.add(
                     SystemProgram.transfer({
@@ -79,7 +78,6 @@ function SendSol() {
                         lamports: balance,
                     })
                 );
-
                 const fee = await connection.getFeeForMessage(transaction.compileMessage());
 
                 if (fee.value !== null) {
@@ -87,6 +85,7 @@ function SendSol() {
                     setMaxTransferable(maxTransferable);
                 } else {
                     console.warn("Could not estimate fee");
+                    setMaxTransferable(0);
                 }
 
             } catch (error) {
@@ -99,12 +98,12 @@ function SendSol() {
         if (wallet && wallet.connected && wallet.publicKey) {
             fetchBalanceAndFee();
         }
-    }, []);
+    }, [wallet.publicKey, connection]);
 
     return (
         <>
             <div className="flex flex-col items-center justify-center gap-4 w-72">
-                <div className="text-xl text-white font-semibold tracking-wider">
+                <div className="font-bold text-2xl  tracking-wide">
                     Send SOL
                 </div>
                 <InputBox reference={(e) => refInput.current = e} text={`Amount - Max. ${maxTransferable} SOL`} typeOfInp={'number'}/>
@@ -114,10 +113,9 @@ function SendSol() {
             
             
             {loading && (
-              <Loading />
+              <Loader />
             )}
         </>
     )
 }
-
 export default SendSol

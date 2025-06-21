@@ -7,6 +7,7 @@ import WalletContexProvide from "@/components/WalletContexProvide";
 import '@solana/wallet-adapter-react-ui/styles.css';
 import { Analytics } from "@vercel/analytics/next"
 import MagnaticCursor from "@/components/ui/MagnaticCursor";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +53,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Toaster />
+          <Footer />
         </WalletContexProvide>
         <MagnaticCursor/>
         <Analytics/>
