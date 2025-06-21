@@ -1,7 +1,7 @@
 
 function AirDrop() {
      return (
-          <div>page</div>
+          <div>Air drop</div>
      )
 }
 

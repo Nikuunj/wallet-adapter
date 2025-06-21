@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Button from "./Button";
 import InputBox from "./InputBox";
 import Spyder from "./icons/Spyder";
-import Loading from "./Loading";
+import Loading from "./Loader";
 
 function FausetSol() {
     const { publicKey } = useWallet();

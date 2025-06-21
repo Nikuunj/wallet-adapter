@@ -1,9 +1,9 @@
-import Loading from "@/components/Loading"
+import Loader from "@/components/Loader"
 
-function loading() {
-  return (
-    <Loading />
-  )
+function Loading() {
+    return (
+        <Loader />
+    )
 }
 
-export default loading
+export default Loading

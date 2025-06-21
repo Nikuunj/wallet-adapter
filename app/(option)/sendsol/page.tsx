@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import InputBox from "@/components/InputBox";
-import Loading from "@/components/Loading";
+import Loading from "@/components/Loader";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { useEffect, useRef, useState } from "react"

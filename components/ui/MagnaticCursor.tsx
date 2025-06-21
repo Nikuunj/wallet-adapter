@@ -46,7 +46,7 @@ function MagnaticCursor() {
                          width: cursorSize,
                          height: cursorSize
                     }}
-                    className="fixed z-50 w-[5px] h-[5px] bg-white pointer-events-none rounded-full"
+                    className="fixed z-40 w-[5px] h-[5px] bg-white pointer-events-none rounded-full"
 
                >
                </motion.div>

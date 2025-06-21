@@ -2,7 +2,7 @@
 
 import Button from '@/components/Button';
 import InputBox from '@/components/InputBox';
-import Loading from '@/components/Loading';
+import Loading from '@/components/Loader';
 import { ed25519 } from '@noble/curves/ed25519';
 import { useWallet } from '@solana/wallet-adapter-react';
 import bs58 from 'bs58';

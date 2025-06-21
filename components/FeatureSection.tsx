@@ -2,7 +2,6 @@
 
 import CornerBorderSpotlight from "./ui/CornerBorderSpotlight"
 import FeatureCard from "./ui/FeatureCard"
-import MagnaticCursor from "./ui/MagnaticCursor"
 import SecondaryHeader from "./ui/SecondaryHeader"
 import { SpotlightText } from "./ui/SpotlightText"
 import { features } from "@/utils/feature"
@@ -32,7 +31,6 @@ function FeatureSection() {
                          {featureRender}
                     </div>
                </div>
-               <MagnaticCursor/>
           </div>
      )
 }
