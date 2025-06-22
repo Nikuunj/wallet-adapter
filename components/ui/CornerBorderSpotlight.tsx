@@ -15,9 +15,9 @@ const CornerBorderSpotlight: React.FC<Props> = ({ children, borderStyle, classNa
                <BorderCorners />
                <BorderSpotlight>
                     {/* Box with dotted border under the corners */}
-                    <div className={`absolute inset-0 border ${borderStyle}  z-10 border-red-300/70`} />
-               </BorderSpotlight>
+                    <div className={`absolute inset-0 border ${borderStyle}  border-red-300/70 `} />
                {/* Children */}
+               </BorderSpotlight>
                <div className="relative z-20 w-full h-full">
                     {children}
                </div>

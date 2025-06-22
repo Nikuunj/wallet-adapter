@@ -15,7 +15,7 @@ const Footer = () => {
     },
     {
       icon: Twitter,
-      url: 'https://x.com/nikunj__makwana/',
+      url: 'https://x.com/nikunj__makwana',
       color: '#1DA1F2',
       name: 'Twitter'
     },

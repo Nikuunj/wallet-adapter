@@ -37,7 +37,7 @@ function BorderSpotlight({ children, className = "", ...props }: BorderSpotlight
                          })
                     }}
                     onHoverEnd={() => {
-                         animate(maskSize, 13, {
+                         animate(maskSize, 0, {
                          duration: 0.3,
                          ease: "easeIn",
                          })

@@ -8,7 +8,7 @@ import LastSection from "@/components/LastSection"
 
 function page() {
      return (
-          <div>
+          <div className="flex flex-col">
                <HeroSection />
                <div className="">
                     <GridSmallBackground />
@@ -20,7 +20,6 @@ function page() {
                          <WhyChooseSection />
                          <LastSection />
                          <div />
-                         {/* <Footer /> */}
                     </div>
                </div>
           </div>
