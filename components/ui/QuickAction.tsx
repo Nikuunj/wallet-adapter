@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Coins, FileSignature, Send, Sparkles, Zap } from "lucide-react"
+import { Coins, Repeat, Send, Sparkles, Zap } from "lucide-react"
 import { useRouter } from "next/navigation";
 
 function QuickAction() {
@@ -11,26 +11,26 @@ function QuickAction() {
     { 
       icon: Coins, 
       text: "Create New Token",
-      iconColor: "text-yellow-400",
+      iconColor: "text-indigo-500",
       to: '/createToken',
     },
     { 
       icon: Send, 
       text: "Send SOL",
-      iconColor: "text-green-400",
+      iconColor: "text-blue-500",
       to: '/sendsol',
     },
     { 
-      icon: FileSignature, 
-      text: "Sign Messages",
-      iconColor: "text-green-500",
-      to: '/signmsg',
+      icon: Zap, 
+      text: "Mint Token",
+      iconColor: "text-yellow-500",
+      to: '/mintToken',
     },
     { 
-      icon: Zap, 
-      text: "Get Test SOL",
-      iconColor: "text-purple-400",
-      to: '/airdrop',
+      icon: Repeat, 
+      text: "Swap",
+      iconColor: "text-cyan-500",
+      to: '/swap',
     },
   ]
 

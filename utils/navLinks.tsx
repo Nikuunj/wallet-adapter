@@ -1,4 +1,4 @@
-import { Coins, FileSignature, Send, Wallet, Zap } from "lucide-react";
+import { Coins, FileSignature, Repeat, Send, Wallet, Zap } from "lucide-react";
 
 interface navLinkType {
      title: string;
@@ -18,6 +18,12 @@ export const navLink: navLinkType[] = [
           title: "Send SOL",
           Icon: <Send className="h-5 w-5 text-blue-500" />,
           to: '/sendsol',
+          color: 'text-blue-500'
+     },
+     {
+          title: "Swap",
+          Icon: <Repeat className="h-5 w-5 text-cyan-500" />,
+          to: '/swap',
           color: 'text-blue-500'
      },
      {
