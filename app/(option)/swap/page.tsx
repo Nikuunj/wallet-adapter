@@ -1,10 +1,7 @@
 "use client"
 
-import { useSolanaNetwork } from "@/components/WalletContexProvide";
 import { tokenData } from "@/utils/tokenData";
-import axios from "axios"
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast";
+import { useState } from "react"
 
 export interface TokenTypes {
   chainId: number;
@@ -18,7 +15,6 @@ export interface TokenTypes {
 }
 
 function SwapToken() {
-     const { network } = useSolanaNetwork();
      const [inputToken, setInputToken] = useState<string>("So11111111111111111111111111111111111111111")
      const [outputToken, setOutputToken] = useState<string>("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
 
