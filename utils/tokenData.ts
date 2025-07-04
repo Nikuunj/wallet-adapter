@@ -1,7 +1,7 @@
 export const tokenData = [
      {
           chainId: 101,
-          address: 'So11111111111111111111111111111111111111111',
+          address: 'So11111111111111111111111111111111111111112',
           symbol: 'SOL',
           decimals: 9,
           name: 'Solana',
