@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "X-AirDrop",
+  title: "XA",
   description: `A Solana faucet is a platform that provides free testnet SOL tokens to developers for testing and developing applications on the Solana blockchain. These tokens are used in the Solana Devnet and Testnet networks, allowing developers to experiment with smart contracts, dApps, and other blockchain-based tools without using real SOL. 
     How to Use a Solana Faucet:
     1. Find a Faucet:
