@@ -48,7 +48,7 @@ const Footer = () => {
   };
 
   return (
-     <div className='flex justify-center mt-5'>
+     <div className=' flex justify-center mt-5'>
      <motion.div 
         className="bg-black/20 backdrop-blur-md rounded-2xl  p-3 border border-white/10 shadow-2xl z-50"
         initial={{ y: 100, opacity: 0 }}
