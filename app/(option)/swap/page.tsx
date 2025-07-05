@@ -8,7 +8,8 @@ import { motion, useAnimation } from "framer-motion";
 import toast from "react-hot-toast";
 import axios from "axios";
 import Button from "@/components/Button";
-import { swapFuction } from "@/utils/swapFunction";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { swapFunction } from "@/utils/swapFunction";
 
 export interface TokenTypes {
      chainId: number;
@@ -29,6 +30,10 @@ function SwapToken() {
      const [inputAmount, setInputAmout] = useState<string>('')
      const [outputAmount, setOutnputAmout] = useState<string>('')
      const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+     const [quoteResponse, setquoteResponse] = useState<unknown>(null);
+
+     const wallet = useWallet();
+     const { connection } = useConnection();
 
 
      const controls = useAnimation();
@@ -74,6 +79,7 @@ function SwapToken() {
                setOutnputAmout('');
                setInputPriceUsd('0.00');
                setOutputPriceUsd('0.00');
+               setquoteResponse(null);
                return;   
           }
           const selectedToken = tokenData.find(t => t.address === inputToken);
@@ -94,6 +100,7 @@ function SwapToken() {
           const response = await axios.get(`https://quote-api.jup.ag/v6/quote?${params}`);
           const data = response.data;
           console.log(data);
+          setquoteResponse(data);
 
           const selectedOutToken = tokenData.find(t => t.address === outputToken);
           const decimalsOut = selectedOutToken?.decimals || 9;
@@ -114,7 +121,7 @@ function SwapToken() {
           if (Number(inputAmount) > 0) {
                intervalRef.current = setInterval(() => {
                     fetchAmonutValue();
-               }, 1500);
+               }, 3111);
           }
 
           return () => {
@@ -305,7 +312,7 @@ function SwapToken() {
                     </div>
                </div>
 
-               <Button handleClick={swapFuction} text={'Swap'}/>
+               <Button handleClick={() =>swapFunction({ wallet, connection, quoteResponse })} text={'Swap'}/>
           </div>
      );
 }
