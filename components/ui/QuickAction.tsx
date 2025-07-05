@@ -15,6 +15,12 @@ function QuickAction() {
       to: '/createToken',
     },
     { 
+      icon: Repeat, 
+      text: "Swap",
+      iconColor: "text-cyan-500",
+      to: '/swap',
+    },
+    { 
       icon: Send, 
       text: "Send SOL",
       iconColor: "text-blue-500",
@@ -25,12 +31,6 @@ function QuickAction() {
       text: "Mint Token",
       iconColor: "text-yellow-500",
       to: '/mintToken',
-    },
-    { 
-      icon: Repeat, 
-      text: "Swap",
-      iconColor: "text-cyan-500",
-      to: '/swap',
     },
   ]
 

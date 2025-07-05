@@ -24,7 +24,7 @@ export interface TokenTypes {
 
 function SwapToken() {
      const [inputToken, setInputToken] = useState<string>("So11111111111111111111111111111111111111112");
-     const [outputToken, setOutputToken] = useState<string>("6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN");
+     const [outputToken, setOutputToken] = useState<string>("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
      const [inputPriceUsd, setInputPriceUsd] = useState<string>('0.00');
      const [outputPriceUsd, setOutputPriceUsd] = useState<string>('0.00');
      const [inputAmount, setInputAmout] = useState<string>('')
@@ -134,6 +134,14 @@ function SwapToken() {
 
      return (
           <div className="flex flex-col gap-y-2">
+               <div className="font-bold text-2xl  tracking-wide text-center mb-3">
+                    <p>
+                         Swap Anything,
+                    </p>
+                    <p>
+                         AnyWhere
+                    </p>
+                </div>
                <div className="flex flex-col items-end bg-zinc-900 py-7 px-5 gap-y-3 rounded-lg w-fit">
                     <div className="flex font-semibold w-full justify-between items-center text-sm">
                          <div className="space-y-2">

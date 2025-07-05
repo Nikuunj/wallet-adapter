@@ -10,8 +10,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   const wallet = useWallet();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[85vh] top-20 relative w-full">
-        <CornerBorderSpotlight className="px-2 sm:px-11 py-13 sm:py-19 z-40">
+    <div className="flex flex-col items-center justify-center min-h-[100vh] top-20 relative w-full mb-16">
+        <CornerBorderSpotlight className="px-2 sm:px-11 py-13 sm:py-15 z-40">
           { wallet.publicKey && wallet.connected ? children
           : <div className="flex flex-col items-center justify-center gap-4">
               <BaseWalletMultiButton labels={CONNECT_LABELS} style={{ background: 'transparent', padding:0, height:'fit-content', alignItems: 'center' }}>

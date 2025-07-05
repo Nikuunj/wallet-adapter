@@ -45,14 +45,16 @@ function MintToken() {
     }
     return (
         <>
-            <div>
-                <div>
-                        <div className="w-72 gap-5 flex flex-col">
-                            <InputBox reference={(e) => refMintAdress.current = e} text={`Token Address`} typeOfInp={'text'}/>
-                            <InputBox reference={(e) => refMintAmount.current = e} text={`Mint Amount`} typeOfInp={'Number'}/>
-                            <Button handleClick={handleMintToken} text={'Mint Token'} />
-                        </div>
-                </div>
+            
+            <div className="flex flex-col items-center justify-center gap-5 w-72">
+            <div className="font-bold text-2xl  tracking-wide text-center">
+                Mint Token
+            </div>
+                    <div className="w-72 gap-5 flex flex-col">
+                        <InputBox reference={(e) => refMintAdress.current = e} text={`Token Address`} typeOfInp={'text'}/>
+                        <InputBox reference={(e) => refMintAmount.current = e} text={`Mint Amount`} typeOfInp={'Number'}/>
+                        <Button handleClick={handleMintToken} text={'Mint Token'} />
+                    </div>
             </div>
 
             {loading && (
