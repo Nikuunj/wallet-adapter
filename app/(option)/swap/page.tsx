@@ -2,10 +2,13 @@
 
 import { tokenData } from "@/utils/tokenData";
 import { ArrowUpDown, Copy } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { motion, useAnimation } from "framer-motion";
 import toast from "react-hot-toast";
+import axios from "axios";
+import Button from "@/components/Button";
+import { swapFuction } from "@/utils/swapFunction";
 
 export interface TokenTypes {
      chainId: number;
@@ -20,9 +23,13 @@ export interface TokenTypes {
 
 function SwapToken() {
      const [inputToken, setInputToken] = useState<string>("So11111111111111111111111111111111111111112");
-     const [outputToken, setOutputToken] = useState<string>("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+     const [outputToken, setOutputToken] = useState<string>("6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN");
+     const [inputPriceUsd, setInputPriceUsd] = useState<string>('0.00');
+     const [outputPriceUsd, setOutputPriceUsd] = useState<string>('0.00');
      const [inputAmount, setInputAmout] = useState<string>('')
      const [outputAmount, setOutnputAmout] = useState<string>('')
+     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
 
      const controls = useAnimation();
      const isRotatedRef = useRef(false);
@@ -41,7 +48,7 @@ function SwapToken() {
 
      function handleCopy(textCopy: string) {
           navigator.clipboard.writeText(textCopy);
-          toast.success("Copied to clipboard"); 
+          toast.success("Copied to clipboard");
      }
 
      const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>, token: string): string | void=> {
@@ -62,6 +69,61 @@ function SwapToken() {
           value: token.address,
           label: token.symbol,
      }));
+     async function fetchAmonutValue(){
+          if(Number(inputAmount) <= 0 ) { 
+               setOutnputAmout('');
+               setInputPriceUsd('0.00');
+               setOutputPriceUsd('0.00');
+               return;   
+          }
+          const selectedToken = tokenData.find(t => t.address === inputToken);
+          const decimals = selectedToken?.decimals || 9;
+
+          // Use BigInt-safe conversion
+          const amountInBaseUnits = BigInt(
+               Number(inputAmount || "0") * Math.pow(10, decimals)
+          ).toString();
+
+          const params = new URLSearchParams({
+               inputMint: inputToken,
+               outputMint: outputToken,
+               amount: amountInBaseUnits,
+               slippageBps: "50",
+          });
+
+          const response = await axios.get(`https://quote-api.jup.ag/v6/quote?${params}`);
+          const data = response.data;
+          console.log(data);
+
+          const selectedOutToken = tokenData.find(t => t.address === outputToken);
+          const decimalsOut = selectedOutToken?.decimals || 9;
+          setOutnputAmout((data.outAmount / Math.pow(10, decimalsOut)).toString())
+          setInputPriceUsd(Number(data.swapUsdValue).toFixed(2));
+          setOutputPriceUsd(Number(data.swapUsdValue).toFixed(2));
+     }
+     useEffect(() => {
+          const timer = setTimeout(fetchAmonutValue, 201);
+          return () => clearTimeout(timer);
+     }, [inputAmount, inputToken, outputToken]);
+
+     useEffect(() => {
+          if (intervalRef.current) {
+               clearInterval(intervalRef.current);
+          }
+
+          if (Number(inputAmount) > 0) {
+               intervalRef.current = setInterval(() => {
+                    fetchAmonutValue();
+               }, 1500);
+          }
+
+          return () => {
+               if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                    intervalRef.current = null;
+               }
+          };
+     }, [inputAmount]);
 
      return (
           <div className="flex flex-col gap-y-2">
@@ -145,7 +207,7 @@ function SwapToken() {
                               value={inputAmount}
                               className="w-full bg-transparent outline-none text-3xl text-end font-bold text-white placeholder-gray-600"
                          />
-                         <p className="text-[13px] font-semibold text-gray-300/95">$0.00</p>
+                         <p className="text-[13px] font-semibold text-gray-300/95">${inputPriceUsd}</p>
                     </div>
                </div>
 
@@ -153,9 +215,9 @@ function SwapToken() {
                      <motion.span
                          animate={controls}
                          onClick={handleClick}
-                         className="bg-zinc-900 border-zinc-800 border p-2 absolute rounded-full cursor-pointer"
+                         className="bg-zinc-900 border-black border-4 p-3 absolute rounded-full cursor-pointer"
                     >
-                         <ArrowUpDown />
+                         <ArrowUpDown className="w-4 h-4" />
                     </motion.span>
                </div>
 
@@ -230,18 +292,20 @@ function SwapToken() {
                          <input
                               type="number"
                               placeholder="0.00"
-                              onChange={(e) => { 
-                                   const val = handleAmountChange(e, outputToken);
-                                   if (val !== undefined) {
-                                        setOutnputAmout(val);
-                                   }
-                              }}
+                              // onChange={(e) => { 
+                              //      const val = handleAmountChange(e, outputToken);
+                              //      if (val !== undefined) {
+                              //           setOutnputAmout(val);
+                              //      }
+                              // }}
                               value={outputAmount}
                               className="w-full bg-transparent outline-none text-3xl text-end font-bold text-white placeholder-gray-600"
                          />
-                         <p className="text-[13px] font-semibold text-gray-300/95">$0.00</p>
+                         <p className="text-[13px] font-semibold text-gray-300/95">~ ${outputPriceUsd}</p>
                     </div>
                </div>
+
+               <Button handleClick={swapFuction} text={'Swap'}/>
           </div>
      );
 }
